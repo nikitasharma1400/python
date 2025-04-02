@@ -1,0 +1,20 @@
+#strings complete
+
+
+a="my name is nikita.i am nineteen.i study engineering."
+print(a)
+print(a[1])
+print(a[4:18])
+print(a[::-1])
+b="nikiatatatatattatat"
+del b
+a1="My"+a[2:]
+print(a1)
+print(len(a))
+print(a.upper())
+print(a.lower())
+s="hello world"+" "+"i am nikita"
+print(s)
+name="nikita"
+cllass="btech"
+print(f"Name:{name},Cllass:{cllass}")
