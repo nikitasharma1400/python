@@ -1,0 +1,39 @@
+#in python set is basially a built in data structure in python whcih stores unordered collection of unique elements.sets are unordered,mutabable(changeable) and stores unique elements that means it will automatically delete duplicates.
+shapes={"heart","square","circle","rectangle","heart"}
+#set elements are always enclosed by {} brackets.
+print(shapes)
+#automatically deletes the duplicate element
+#add elements through add()
+shapes.add("trapezium")
+print(shapes)
+#trapezium did got added but in an unordered way
+SHAPES={"rhombus","parallelogram"}
+shapes.update(SHAPES)
+print(shapes)
+#used to add elements from any other list,string
+shapes.discard("square")
+print(shapes)
+#discard() is ued to remove an element from the set
+print(len(shapes))
+a={1,2,3,4,5,6,7}
+b={2,4,6,7}
+print(a|b)
+print(a.union(b))
+#union of two sets using two different methods.
+#intersection of two sets
+print(a&b)
+print(a.intersection(b))
+#difference of two sets
+print(a-b)
+print(a.difference(b))
+#difference of elements o two sets(not subtraction the output will display all the elements which are different)
+a={1,2,3,4,5,6,87,86,44}
+b={2,4,6,7,99,23,45}
+print(a^b)
+print(a.symmetric_difference(b))
+if a==b:
+    print('set a and set b are equal')
+else:
+    print('set a and b are not equal')
+a.clear()
+#removes all elements from that particular set
