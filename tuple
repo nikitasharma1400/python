@@ -1,0 +1,10 @@
+#tuple is always created inside closed parantheses for example fruits=("banana","apple","gauava")
+city=("mumbai","delhi","kolkata","chd")
+print(city)
+#unlike lists they ae=re immutable,ordered and allow duplicates.and same indexing methods as there in lists.
+print(city[0])
+print(city[1])
+print(len(city))
+for City in city:
+    print(City)
+del city
