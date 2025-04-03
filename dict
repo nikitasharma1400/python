@@ -1,0 +1,21 @@
+#just like strings,lists and tuples dict is a built in data structure used for collection of different elements.but unlike other data type sthey store valuees in a key-pair form iside {} brackets.they are mutable and unordered and key values must be unique and immutable.
+cityandcaps={
+    "raj":"jaipur",
+    "punjab":"chd",
+    "up":"lucknow"
+    
+}
+print(cityandcaps)
+#element indexing will be as follows:-"raj":"jaipur" is going to be the first element as a whole
+#accessing elemnts
+print(cityandcaps["raj"])
+#adding elemnts 
+cityandcaps["delhi"]="delhi"
+print(cityandcaps)
+#deleting elements
+del cityandcaps["raj"]
+print(cityandcaps)
+#changing values
+cityandcaps["punjab"]="mohali"
+print(cityandcaps)
+print(len(cityandcaps))
