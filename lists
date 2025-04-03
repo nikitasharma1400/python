@@ -1,0 +1,45 @@
+#list is a built in data structure used to store a collection of items.lists are mutable,ordered and can store multipole types of data for example:integers,strings,objects.
+#lists can contain duplicate values.
+#a string is basically a sequence of characters.generally everuything inside the double quotes is considered as a part of the stering which includes different datra types: characters,symbols and numbers.also since python doesnt have a character data type hence any single letter inside the double quotes is generally considered as a string of length one.also strings are immutable,ordered and duplicates are allowed.
+cars=['skoda','ghoda gadi','swift','dzire']
+#skoda= index number 0,ghoda gadi is index number 1 and so on
+print(cars[1])
+print("most expensive car is=",cars[2])
+#negative indexing will be like: dzire will be -1,swift will be -2 and so on
+print(cars[-2])
+#slicing will be for example in the list given above 
+print(cars[0:2]) #2 will not be included since whenever we slice a string [start:end] end is never included but the output will include starting elements all the elements in between and end-1 element.
+print(cars[1:-1])
+print(cars[::-1]) #reverse of a list also you can do the same for strings.
+#omiiting starting and ending 
+print(cars[1:]) #will include 1 and all the elements after that
+print(cars[:1])
+#adding elemts at the end of the string through append()
+print("original list: ",cars)
+cars.append("ferrari") #add ferrari t the end of the list
+print(cars)
+cars.append("BMW")
+print(cars)
+#adding at a specific index through insert method
+cars.insert(0,"i20")
+print(cars)
+cars.insert(1,"nano")
+print(cars)
+#adding elements into a list through other list using extend()
+car=["i10","thar","scorpio"]
+cars.extend(car)
+print(cars) #all the elements from car list will be added at the end of the list cars.
+#we already know that unlike strings lists are immutable.
+cars[0]="bolero"
+cars[5]="porsche"
+print(cars)
+#we can also remove or delete elemnts through remove()
+
+cars.remove("scorpio")
+print(cars)
+#remove more than one elements
+del cars[1:3]
+print(cars)
+print(len(cars))
+for Car in cars: 
+    print(Car)
