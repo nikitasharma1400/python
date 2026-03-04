@@ -1,0 +1,33 @@
+import colorgram
+
+def get_holi_vibes(image_path, num_colors):
+    print(f"extracting {num_colors} festive colors from {image_path}...")
+    
+    
+    colors = colorgram.extract(image_path, num_colors)
+    
+    palette = []
+    
+    print("holi color palette")
+    for color in colors:
+        
+        r = color.rgb.r
+        g = color.rgb.g
+        b = color.rgb.b
+        
+        
+        hex_code = '#{:02x}{:02x}{:02x}'.format(r, g, b)
+        
+        
+        proportion = round(color.proportion * 100, 2)
+        
+        palette.append(hex_code)
+        print(f"color: {hex_code} | rgb: ({r}, {g}, {b}) | usage: {proportion}%")
+    
+    return palette
+
+
+if __name__ == "__main__":
+    
+    my_colors = get_holi_vibes(r"C:\Users\ASUS\Downloads\OIP.jpg", 6)
+    print("\nready to use in your next project")
