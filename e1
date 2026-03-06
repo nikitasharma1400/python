@@ -1,0 +1,23 @@
+import pandas as pd
+from sklearn.linear_model import Ridge
+
+df_train = pd.read_csv('train (1).csv')
+df_test = pd.read_csv('test (1).csv')
+df_sub = pd.read_csv('sample_submission.csv')
+
+features = [c for c in df_train.columns if 'input' in c]
+targets = [c for c in df_train.columns if 'target' in c]
+
+x = df_train[features]
+y = df_train[targets]
+x_val = df_test[features]
+
+algo = Ridge(alpha=1.0)
+algo.fit(x, y)
+
+final_preds = algo.predict(x_val)
+
+df_sub[targets] = final_preds
+df_sub.to_csv('submission.csv', index=False)
+
+print("file created successfully")
