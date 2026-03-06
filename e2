@@ -1,0 +1,55 @@
+import pandas as pd
+import lightgbm as lgb
+from sklearn.ensemble import VotingClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+
+def start_process():
+    train_data = pd.read_csv("train.csv") 
+    test_data = pd.read_csv("test.csv")
+
+    cols = [f'f{i}' for i in range(87, 175)]
+    
+    x = train_data[cols]
+    y = train_data['label']
+    x_test = test_data[cols]
+
+    weights_map = {1:1, 2:5, 3:1, 4:1, 5:2, 6:10, 7:20}
+    w = y.map(weights_map)
+
+    m1 = lgb.LGBMClassifier(
+        n_estimators=600,
+        learning_rate=0.03,
+        num_leaves=31,
+        random_state=1,
+        n_jobs=-1
+    )
+
+    m2 = RandomForestClassifier(
+        n_estimators=300,
+        max_depth=15,
+        random_state=1,
+        n_jobs=-1
+    )
+
+    m3 = LogisticRegression(
+        max_iter=1000,
+        random_state=1
+    )
+
+    ensemble = VotingClassifier(
+        estimators=[('lgbm', m1), ('rf', m2), ('lr', m3)],
+        voting='soft'
+    )
+
+    print("starting training ensemble... this might take 6-8 mins")
+    
+    ensemble.fit(x, y, sample_weight=w)
+    
+    p = ensemble.predict(x_test)
+
+    out = pd.DataFrame({'id': test_data['id'], 'label': p})
+    out.to_csv("submission.csv", index=False)
+    print("success! check your folder for submission.csv")
+
+if __name__ == "__main__":
+    start_process()
