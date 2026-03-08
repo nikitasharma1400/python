@@ -1,0 +1,29 @@
+import os
+import shutil
+
+def organize_folder(path):
+    # map extensions to folder names
+    extensions = {
+        'images': ['.jpg', '.jpeg', '.png', '.gif'],
+        'docs': ['.pdf', '.docx', '.txt', '.xlsx'],
+        'videos': ['.mp4', '.mkv', '.mov'],
+        'archives': ['.zip', '.rar']
+    }
+
+    for filename in os.listdir(path):
+        file_ext = os.path.splitext(filename)[1].lower()
+        
+        for folder, exts in extensions.items():
+            if file_ext in exts:
+                folder_path = os.path.join(path, folder)
+                
+                # create folder if it doesn't exist
+                if not os.path.exists(folder_path):
+                    os.makedirs(folder_path)
+                
+                # move file
+                shutil.move(os.path.join(path, filename), os.path.join(folder_path, filename))
+                print(f"moved: {filename} -> {folder}")
+
+# use '.' for current directory or provide a specific path
+organize_folder('.')
