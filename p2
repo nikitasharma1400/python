@@ -1,0 +1,50 @@
+import csv
+import os
+from collections import defaultdict
+
+FILE_NAME = "expenses.csv"
+
+
+def view_expenses():
+    if not os.path.exists(FILE_NAME):
+        print("No expense file found.")
+        return
+
+    expenses = []
+    category_totals = defaultdict(float)
+    overall_total = 0
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            try:
+                amount = float(row["Amount"])
+            except ValueError:
+                continue
+
+            expenses.append(row)
+            category_totals[row["Category"]] += amount
+            overall_total += amount
+
+    if not expenses:
+        print("No expenses found.")
+        return
+
+    print("\n--- All Expenses ---")
+    for item in expenses:
+        print(
+            f"Date: {item['Date']}, "
+            f"Category: {item['Category']}, "
+            f"Amount: ₹{item['Amount']}, "
+            f"Description: {item['Description']}"
+        )
+
+    print("\n--- Category-wise Total ---")
+    for category, total in category_totals.items():
+        print(f"{category}: ₹{total:.2f}")
+
+    print(f"\nOverall Total: ₹{overall_total:.2f}")
+
+
+if __name__ == "__main__":
+    view_expenses()
