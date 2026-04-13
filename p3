@@ -1,0 +1,54 @@
+import csv
+import os
+from datetime import datetime
+
+FILE_NAME = "expenses.csv"
+
+
+def check_budget():
+    if not os.path.exists(FILE_NAME):
+        print("No expense file found.")
+        return
+
+    month_input = input("Enter month to check (YYYY-MM): ").strip()
+
+    try:
+        datetime.strptime(month_input, "%Y-%m")
+    except ValueError:
+        print("Invalid month format.")
+        return
+
+    try:
+        budget = float(input("Enter your monthly budget: ").strip())
+        if budget <= 0:
+            print("Budget must be greater than 0.")
+            return
+    except ValueError:
+        print("Invalid budget amount.")
+        return
+
+    monthly_total = 0
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["Date"].startswith(month_input):
+                try:
+                    monthly_total += float(row["Amount"])
+                except ValueError:
+                    continue
+
+    print(f"\nTotal spending for {month_input}: ₹{monthly_total:.2f}")
+    print(f"Budget: ₹{budget:.2f}")
+
+    if monthly_total > budget:
+        print("Alert: You have exceeded your monthly budget!")
+    elif monthly_total == budget:
+        print("You have exactly reached your budget.")
+    else:
+        remaining = budget - monthly_total
+        print(f"You are within budget. Remaining: ₹{remaining:.2f}")
+
+
+if __name__ == "__main__":
+    check_budget()
