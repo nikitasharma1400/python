@@ -1,0 +1,52 @@
+import csv
+import os
+from datetime import datetime
+
+FILE_NAME = "expenses.csv"
+
+
+def create_file():
+    if not os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Date", "Category", "Amount", "Description"])
+
+
+def add_expense():
+    create_file()
+
+    date_input = input("Enter date (YYYY-MM-DD) or press Enter for today: ").strip()
+    if date_input == "":
+        date_input = datetime.today().strftime("%Y-%m-%d")
+
+    try:
+        datetime.strptime(date_input, "%Y-%m-%d")
+    except ValueError:
+        print("Invalid date format.")
+        return
+
+    category = input("Enter category: ").strip()
+    if not category:
+        print("Category cannot be empty.")
+        return
+
+    try:
+        amount = float(input("Enter amount: ").strip())
+        if amount <= 0:
+            print("Amount must be greater than 0.")
+            return
+    except ValueError:
+        print("Invalid amount.")
+        return
+
+    description = input("Enter description: ").strip()
+
+    with open(FILE_NAME, "a", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow([date_input, category, amount, description])
+
+    print("Expense added successfully.")
+
+
+if __name__ == "__main__":
+    add_expense()
